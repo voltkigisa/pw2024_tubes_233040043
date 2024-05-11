@@ -1,11 +1,31 @@
-<?php include '../layout/navbar.php';?>
+<?php include '../layout/navbar.php';
+require_once '../../controller/TempatController.php';
+require_once '../../koneksi.php';
 
+if(isset($_POST['submit'])){
+
+    $result = storeTempat($koneksi);
+    if(storeTempat($koneksi) > 0){
+        echo "<script>
+            alert('Data berhasil ditambahkan');
+            window.location.href='index.php';
+         </script>";
+        //  header("Location: index.php");
+        }else{
+            echo "<script> 
+            alert('Data berhasil ditambahkan');
+            window.location.href='index.php';
+            </script>";
+            // header("Location: index.php");
+        }
+
+}?>
     <h1>Tambah Tempat Wisata</h1>
     <div class="container-create-tempat">
         <a href="index.php"><button type="button" class="btn btn-primary my-3">Kembali</button></a>
 
-        <form method="POST" action="../../controller/TempatController.php" enctype="multipart/form-data">
-        <input type="hidden" name="storeTempat" value="1">
+        <form method="POST" action="" enctype="multipart/form-data">
+        <!-- <input type="hidden" name="storeTempat" value="1"> -->
 
             <div class="mb-3">
                 <label for="nama_tempat" class="form-label
@@ -25,7 +45,7 @@
                 ">Foto Tempat</label>
                 <input type="file" class="form-control" id="foto_tempat" name="foto_tempat">
             </div>
-            <button type="submit" class="btn btn-success">Submit</button>
+            <button type="submit" name="submit" class="btn btn-success">Submit</button>
         </form>
     </div>
 

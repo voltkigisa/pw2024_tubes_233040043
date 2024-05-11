@@ -1,4 +1,5 @@
-<?php include '../layout/navbar.php'?>
+<?php include '../layout/navbar.php';
+require_once '../../controller/TempatController.php';?>
 
     <a href="create_tempat.php"><button type="button" class="btn btn-success my-3">+ tambah</button></a>
     <div class="vh-100">
@@ -15,14 +16,14 @@
             <th>Aksi</th>
         </tr>
         <?php
-        $i=1;
         if (isset($_GET['search'])){
             $search = $_GET['search'];
             $query = $koneksi->query("SELECT * FROM tempat_wisata WHERE nama_tempat LIKE '%$search%'");
         }else{
             $query = $koneksi->query("SELECT * FROM tempat_wisata");
         }
-        while ($data = $query->fetch_assoc()){
+        $i=1;
+        foreach ($tempat_wisata as $data):
             echo "<tr>";
             echo "<td>".$i."</td>";
             echo "<td><img src='img/".$data['foto_tempat']."' width='200px' height='200px'></td>";
@@ -30,7 +31,7 @@
             echo "<td><a href='edit_tempat.php?id_tempat=".$data['id_tempat']."'>Edit</a> | <a href='#' onclick='hapus(".$data['id_tempat'].")'>Hapus</a> |  <a href='hapus_tempat.php?id_tempat=".$data['id_tempat']."'>Lihat</a> </td>";
             echo "</tr>";
             $i++;
-        }
+        endforeach;
         ?>
     </table>
     </div>
