@@ -1,4 +1,5 @@
-<?php include '../../koneksi.php'?>
+<?php require '../../koneksi.php'; ?>
+<?php require '../../controller/TempatController.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
