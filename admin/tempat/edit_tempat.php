@@ -1,9 +1,10 @@
 <?php include '../layout/navbar.php';
 require_once '../../controller/TempatController.php';
+require_once '../../controller/LoginController.php';
 
-$tempatController = new TempatController(); ?>
+$tempatController = new TempatController();
+$loginController = new LoginController();
 
-<?php 
     if(isset($_GET ['id_tempat'])){
         $id_tempat = $_GET['id_tempat'];
         $query = $koneksi->query("SELECT * FROM tempat_wisata WHERE id_tempat = '$id_tempat'");
@@ -11,6 +12,9 @@ $tempatController = new TempatController(); ?>
     }
     session_start();
     if(isset($_POST['submit'])){
+        if($_SESSION['status'] != 'login'){
+            header('Location: ../../views/login/login.php');
+        }
         $result = $tempatController->updateTempat($koneksi);
         if($result > 0){
             $_SESSION['pesan'] = "Data berhasil diubah";
@@ -32,7 +36,7 @@ $tempatController = new TempatController(); ?>
 </div>
 
     <form method="POST" enctype="multipart/form-data" action="">
-        <input type="hidden" name="id_tempat" value="<?php echo isset($data) ? $data['id_tempat'] : '';?>" required>
+        <input type="hidden" name="id_tempat" value="<?php echo isset($data) ? $data['id_tempat'] : '';?>">
 
         <div class="mb-3">
             <label for="nama_tempat" class="form-label">Nama Tempat</label>
