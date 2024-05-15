@@ -1,10 +1,15 @@
 <?php include '../layout/navbar.php';
 require_once '../../controller/TempatController.php';
+require_once '../../controller/LoginController.php';
 
 $tempatController = new TempatController();
+$loginController = new LoginController();
 
 session_start();
 if(isset($_POST['submit'])){
+    if($_SESSION['status'] != 'login'){
+        header('Location: ../../views/login/login.php');
+    }
     $result = $tempatController->storeTempat($koneksi);
     if($result > 0){
         $_SESSION['pesan'] = "Data berhasil ditambahkan";
@@ -21,7 +26,7 @@ if(isset($_POST['submit'])){
         <a href="index.php"><button type="button" class="btn btn-primary my-3">Kembali</button></a>
 
         <form method="POST" action="" enctype="multipart/form-data">
-        <!-- <input type="hidden" name="storeTempat" value="1"> -->
+        <input type="hidden" name="id_user" value="<?php echo isset($data) ? $data['id_user'] : '';?>">
 
             <div class="mb-3">
                 <label for="nama_tempat" class="form-label
