@@ -17,7 +17,8 @@ class TempatController{
     //cek gambar apakah sesuai ketentuan
     if($size < 1000000 && $type == 'image/jpeg' || $type == 'image/png' || $type == 'image/jpg'){
         if(move_uploaded_file($tmp, $absolute_path)){
-            $query = $koneksi->query("INSERT INTO `tempat_wisata` (`id_tempat`,`id_user`, `nama_tempat`, `deskripsi_tempat`, `lokasi_tempat`, `foto_tempat`) VALUES (NULL, '$id_user', '$nama_tempat', '$deskripsi', '$lokasi', '$foto_tempat')");
+            $query = $koneksi->query("INSERT INTO `tempat_wisata` (`id_tempat`,`id_user`, `nama_tempat`, `deskripsi_tempat`, `lokasi_tempat`, `foto_tempat`)
+             VALUES (NULL, '$id_user', '$nama_tempat', '$deskripsi', '$lokasi', '$foto_tempat')");
             if($query){
                 return mysqli_affected_rows($koneksi);
                 }else{

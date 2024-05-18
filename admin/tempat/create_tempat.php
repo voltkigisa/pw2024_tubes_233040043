@@ -1,11 +1,10 @@
 <?php include '../layout/navbar.php';
 require_once '../../controller/TempatController.php';
-require_once '../../controller/LoginController.php';
+require_once '../../controller/UserController.php';
 
 $tempatController = new TempatController();
-$loginController = new LoginController();
+$loginController = new UserController();
 
-session_start();
 if(isset($_POST['submit'])){
     if($_SESSION['status'] != 'login'){
         header('Location: ../../views/login/login.php');

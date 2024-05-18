@@ -1,9 +1,19 @@
     <?php include '../layout/navbar.php';
     require_once '../../controller/TempatController.php';
-    require_once '../../controller/LoginController.php';
+    require_once '../../controller/UserController.php';
 
     $TempatController = new TempatController();
-    $LoginController = new LoginController();
+    $LoginController = new UserController();
+
+    if (!isset($_SESSION['username'])) {
+        header('Location: ../../views/login/login.php');
+        exit();
+    }
+
+    if ($_SESSION['role'] !== 'admin') {
+        header('Location: ../../views/tolak/bukanAdmin.php'); // Buat halaman akses_ditolak.php yang memberi tahu pengguna bahwa akses ditolak
+        exit();
+    }
 
     if(isset($_GET['id_tempat'])){
         if($_SESSION['status'] != 'login'){
@@ -53,7 +63,10 @@
                 echo "<td>".$i."</td>";
                 echo "<td><img src='img/".$data['foto_tempat']."' width='200px' height='200px'></td>";
                 echo "<td>".$data['nama_tempat']."</td>";
-                echo "<td><a href='edit_tempat.php?id_tempat=".$data['id_tempat']."'>Edit</a> | <a href='index.php?id_tempat=".$data['id_tempat']."'>Hapus</a> |  <a href='hapus_tempat.php?id_tempat=".$data['id_tempat']."'>Lihat</a> </td>";
+                echo "<td>
+                        <a href='edit_tempat.php?id_tempat=".$data['id_tempat']."'><button type='button' class='btn btn-warning'>Edit</button></a> 
+                        <a href='index.php?id_tempat=".$data['id_tempat']."'><button type='button' class='btn btn-danger'>Hapus</button></a>   
+                        <a href='hapus_tempat.php?id_tempat=".$data['id_tempat']."'><button type='button' class='btn btn-primary'>Lihat</button></a> </td>";
                 echo "</tr>";
                 $i++;
             endwhile;
@@ -61,6 +74,6 @@
         </table>
         
     <?php include '../layout/footer.php'?>
-</body>
-</html>
+<!-- </body>
+</html> -->
     

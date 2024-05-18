@@ -1,16 +1,16 @@
 <?php include '../layout/navbar.php';
 require_once '../../controller/TempatController.php';
-require_once '../../controller/LoginController.php';
+require_once '../../controller/UserController.php';
 
 $tempatController = new TempatController();
-$loginController = new LoginController();
+$loginController = new UserController();
 
     if(isset($_GET ['id_tempat'])){
         $id_tempat = $_GET['id_tempat'];
         $query = $koneksi->query("SELECT * FROM tempat_wisata WHERE id_tempat = '$id_tempat'");
         $data = $query->fetch_assoc();
     }
-    session_start();
+
     if(isset($_POST['submit'])){
         if($_SESSION['status'] != 'login'){
             header('Location: ../../views/login/login.php');
@@ -31,8 +31,8 @@ $loginController = new LoginController();
 <a href="index.php"><button type="button" class="btn btn-primary my-3">Kembali</button></a>
 <br>
 <div class='mb-3 d-flex flex-column'>
-    <label for="foto_tempat_lama" class="form-label">Foto Tempat Lama</label>
-    <img src="img/<?php echo isset($data) ? $data['foto_tempat'] : ''; ?>" class="img img-thumbnail" alt="">
+    <label for="foto_tempat_lama" class="form-label ">Foto Tempat Lama</label>
+    <img src="img/<?php echo isset($data) ? $data['foto_tempat'] : ''; ?>" class="img img-thumbnail" alt="" style="max-width: 350px; max-height: 350px;">
 </div>
 
     <form method="POST" enctype="multipart/form-data" action="">
