@@ -85,6 +85,7 @@ class UserController
             // Redirect sesuai dengan role
             if ($_SESSION['role'] == 'admin') {
                 header('Location: ../../admin/tempat/index.php');
+                $_SESSION['pesan'] = "Berhasil login";
             } else {
                 header('Location: ../../index.php');
             }

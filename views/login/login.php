@@ -6,13 +6,6 @@ $loginController = new UserController();
 
 if (isset($_POST['login'])) {
     $result = $loginController->login($koneksi);
-    if ($result > 0) {
-        $_SESSION['pesan'] = "Berhasil login";
-        if (isset($_SESSION['role'])) {
-        } else {
-            $_SESSION['pesan'] = "gagal login";
-        }
-    }
 }
 
 $registerPath = '../register/register.php';
