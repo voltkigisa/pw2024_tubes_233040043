@@ -1,7 +1,6 @@
 <?php
 class UserController
 {
-
     public function register($koneksi)
 {
     if (!isset($_POST['username']) || !isset($_POST['password']) || !isset($_POST['email'])) {

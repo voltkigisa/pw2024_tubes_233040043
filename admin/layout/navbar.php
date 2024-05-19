@@ -55,6 +55,11 @@ $profilePath = '/pw2024_tubes_233040043/views/profile/profile.php';
             </ul>
           </li>
         </ul>
+<!-- 
+        <form class="d-flex" role="search" id="search-form">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="search-input">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form> -->
         <!-- ini login logout dan profile -->
         <form method="POST" action="">
           <ul class="navbar-nav ">

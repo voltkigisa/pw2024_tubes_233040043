@@ -1,10 +1,5 @@
     <?php include '../layout/navbar.php';
-    require_once '../../controller/TempatController.php';
-    require_once '../../controller/UserController.php';
-
-    $TempatController = new TempatController();
-    $LoginController = new UserController();
-
+   
     if (!isset($_SESSION['username'])) {
         header('Location: ../../views/login/login.php');
         exit();
@@ -14,6 +9,7 @@
         header('Location: ../../views/tolak/bukanAdmin.php'); // Buat halaman akses_ditolak.php yang memberi tahu pengguna bahwa akses ditolak
         exit();
     }
+
 
     if(isset($_GET['id_tempat'])){
         if($_SESSION['status'] != 'login'){
@@ -37,26 +33,36 @@
     }
 
     ?>
+
+<div id="search-results" class="container mt-3"></div>
+        <div id="search-results"></div>
         <a href="create_tempat.php"><button type="button" class="btn btn-success my-3">+ tambah</button></a>
 
-        <form action="" method="get" class="input-group mb-3" >
-            <input type="text" name="search" placeholder="Search" class="input-group-text">
-            <input type="submit" name="cari" value="Search" class="btn btn-secondary">
+        <form id="search-form" class="input-group mb-3" >
+            <input type="text" name="search" placeholder="Search" class="input-group-text search" id="search">
+            <button type="submit" class="btn btn-primary" id="tombolCari">Search</button>
         </form>
-        <table class="table table-dark table-striped table-responsive table table-hover table-bordered ">
+
+        <div id="table">
+        <table class="table table-dark table-striped table-responsive table table-hover table-bordered tableku">
+            <thead>
             <tr>
                 <th>No</th>
                 <th>Pictutes</th>
                 <th>Nama tempat</th>
                 <th>Aksi</th>
             </tr>
+            </thead>
+            <tbody>
             <?php
-            if (isset($_GET['search'])){
-                $search = $_GET['search'];
-                $query = $koneksi->query("SELECT * FROM tempat_wisata WHERE nama_tempat LIKE '%$search%'");
-            }else{
-                $query = $koneksi->query("SELECT * FROM tempat_wisata");
-            }
+            // if (isset($_GET['search'])){
+            //     $search = $_GET['search'];
+            //     $query = $koneksi->query("SELECT * FROM tempat_wisata WHERE nama_tempat LIKE '%$search%'");
+            // }else{
+            //     $query = $koneksi->query("SELECT * FROM tempat_wisata");
+            // }
+            
+            $query =$koneksi ->query("SELECT * FROM tempat_wisata");
             $i=1;
             while ($data = $query->fetch_assoc()):
                 echo "<tr>";
@@ -71,8 +77,10 @@
                 $i++;
             endwhile;
             ?>
+            </tbody>
         </table>
-        
+        </div>
+
     <?php include '../layout/footer.php'?>
 <!-- </body>
 </html> -->
