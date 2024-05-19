@@ -25,7 +25,7 @@ if (isset($_POST['logout'])) {
                     </div>
 
                     <div class="card-body text-center">
-                        <img src="<?= $data['gambar_user'] ?? '../../assets/img/default.png'; ?>" alt="Foto Profile" class="rounded-circle" width="150">
+                        <img src="/pw2024_tubes_233040043/assets/img/<?= $data['gambar_user']?>" alt="Foto Profile" class="" width="150">
                         <h5 class="mt-3"><?= htmlspecialchars($data['username'] ?? 'N/A'); ?></h5>
                         <p>Email: <?= htmlspecialchars($data['email'] ?? 'N/A'); ?></p>
                         <p>Role: <?= htmlspecialchars($data['role'] ?? 'N/A'); ?></p>
