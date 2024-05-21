@@ -31,7 +31,7 @@ if (isset($_POST['logout'])) {
                         <p>Role: <?= htmlspecialchars($data['role'] ?? 'N/A'); ?></p>
                         <a href="#" class="btn btn-primary">Edit Profil</a>
                         <form method="POST" action="">
-                            <button type="submit" name="logout" class="btn btn-danger">Logout</button>
+                            <button type="submit" name="logout" class="btn btn-danger mt-2">Logout</button>
                         </form>
                     </div>
                 </div>

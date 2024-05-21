@@ -12,10 +12,10 @@
 
 
     if(isset($_GET['id_tempat'])){
-        if($_SESSION['status'] != 'login'){
+        if(!isset($_SESSION['username'])){
             header('Location: ../../views/login/login.php');
         }
-        $result = $TempatController->deleteTempat($koneksi);
+        $result = $tempatController->deleteTempat($koneksi);
         if($result > 0){
             $_SESSION['pesan'] = "Data berhasil dihapus";
         }else{
