@@ -1,9 +1,9 @@
 <?php include '../layout/navbar.php';
-require_once '../../controller/TempatController.php';
-require_once '../../controller/UserController.php';
 
-$tempatController = new TempatController();
-$loginController = new UserController();
+if ($_SESSION['role'] !== 'admin') {
+    header('Location: ../../views/tolak/bukanAdmin.php'); // Buat halaman akses_ditolak.php yang memberi tahu pengguna bahwa akses ditolak
+    exit();
+}
 
 if(isset($_POST['submit'])){
     if($_SESSION['status'] != 'login'){

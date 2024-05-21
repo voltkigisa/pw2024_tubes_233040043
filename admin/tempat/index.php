@@ -66,7 +66,7 @@
             $i=1;
             while ($data = $query->fetch_assoc()):
                 echo "<tr>";
-                echo "<td>".$i."</td>";
+                echo "<td>".$i++."</td>";
                 echo "<td><img src='img/".$data['foto_tempat']."' width='200px' height='200px'></td>";
                 echo "<td>".$data['nama_tempat']."</td>";
                 echo "<td>
@@ -74,7 +74,7 @@
                         <a href='index.php?id_tempat=".$data['id_tempat']."'><button type='button' class='btn btn-danger'>Hapus</button></a>   
                         <a href='hapus_tempat.php?id_tempat=".$data['id_tempat']."'><button type='button' class='btn btn-primary'>Lihat</button></a> </td>";
                 echo "</tr>";
-                $i++;
+                ;
             endwhile;
             ?>
             </tbody>

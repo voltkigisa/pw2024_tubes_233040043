@@ -3,15 +3,30 @@ require_once __DIR__ . '/../../controller/TempatController.php';
 require_once __DIR__ . '/../../controller/UserController.php';
 session_start();
 $tempatController = new TempatController();
-$loginController = new UserController();
+$userController = new UserController();
 
 if (isset($_POST['logout'])) {
-  $loginController->logout();
+  $userController->logout();
   header('Location: /pw2024_tubes_233040043/index.php');
 }
 
+// Tentukan halaman yang aktif
+$activePage = 'home'; // Ubah nilai ini sesuai dengan halaman yang sedang aktif
+$activePage = 'homeCustomer'; // Ubah nilai ini sesuai dengan halaman yang sedang
+
+
+
+// Fungsi untuk menentukan kelas 'active'
+function setActiveClass($page, $activePage) {
+  return ($page === $activePage) ? 'active' : '';
+}
+
+
 $loginPath = '/pw2024_tubes_233040043/views/login/login.php';
 $profilePath = '/pw2024_tubes_233040043/views/profile/profile.php';
+$userPath = '/pw2024_tubes_233040043/admin/user/index.php';
+$tempatPath = '/pw2024_tubes_233040043/admin/tempat/index.php';
+$customerPath = '/pw2024_tubes_233040043/views/customer/index.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -29,18 +44,25 @@ $profilePath = '/pw2024_tubes_233040043/views/profile/profile.php';
 <body>
   <nav class="navbar navbar-expand-lg bg-light">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Navbar</a>
+      <a class="navbar-brand" href="<?= $customerPath ?>">Navbar</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse " id="navbarNavDropdown">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <?php if(isset($_SESSION['role']) && $_SESSION['role'] === 'admin') { ?>
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
+            <a class="nav-link <?= setActiveClass('home', $activePage); ?>" aria-current="page" href="<?= $tempatPath ?>"> Data Tempat Wisata</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Features</a>
+            <a class="nav-link <?= setActiveClass('user', $activePage); ?>" href="<?= $userPath ?>">Data User</a>
           </li>
+          <?php }elseif (!isset($_SESSION['role']) || $_SESSION['role'] === 'costomer' ){ ?>
+          <li class="nav-item">
+            <a class="nav-link <?= setActiveClass('homeCustomer', $activePage); ?>" aria-current="page" href="<?= $customerPath ?>"> Home</a>
+          </li>
+          <?php } ?>
+
           <li class="nav-item">
             <a class="nav-link" href="#">Pricing</a>
           </li>

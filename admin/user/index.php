@@ -1,4 +1,5 @@
 <?php include '../layout/navbar.php';
+
    
    if (!isset($_SESSION['username'])) {
        header('Location: ../../views/login/login.php');
@@ -11,11 +12,11 @@
    }
 
 
-   if(isset($_GET['id_tempat'])){
+   if(isset($_GET['id_user'])){
        if($_SESSION['status'] != 'login'){
            header('Location: ../../views/login/login.php');
        }
-       $result = $TempatController->deleteTempat($koneksi);
+       $result = $userController->deleteUser($koneksi);
        if($result > 0){
            $_SESSION['pesan'] = "Data berhasil dihapus";
        }else{
@@ -36,7 +37,6 @@
 
 <div id="search-results" class="container mt-3"></div>
        <div id="search-results"></div>
-       <a href="create_tempat.php"><button type="button" class="btn btn-success my-3">+ tambah</button></a>
 
        <form id="search-form" class="input-group mb-3" >
            <input type="text" name="search" placeholder="Search" class="input-group-text search" id="search">
@@ -49,7 +49,9 @@
            <tr>
                <th>No</th>
                <th>Pictutes</th>
-               <th>Nama tempat</th>
+               <th>Nama user</th>
+               <th>Email</th>
+               <th>Role</th>
                <th>Aksi</th>
            </tr>
            </thead>
@@ -57,19 +59,21 @@
            <?php
            
            
-           $query =$koneksi ->query("SELECT * FROM tempat_wisata");
+           $query =$koneksi ->query("SELECT * FROM user");
            $i=1;
            while ($data = $query->fetch_assoc()):
                echo "<tr>";
-               echo "<td>".$i."</td>";
-               echo "<td><img src='img/".$data['foto_tempat']."' width='200px' height='200px'></td>";
-               echo "<td>".$data['nama_tempat']."</td>";
+               echo "<td>".$i++."</td>";
+               echo "<td><img src='../../assets/img/".$data['gambar_user']."' width='200px' height='200px'></td>";
+               echo "<td>".$data['username']."</td>";
+               echo "<td>".$data['email']."</td>";
+                echo "<td>".$data['role']."</td>";
                echo "<td>
-                       <a href='edit_tempat.php?id_tempat=".$data['id_tempat']."'><button type='button' class='btn btn-warning'>Edit</button></a> 
-                       <a href='index.php?id_tempat=".$data['id_tempat']."'><button type='button' class='btn btn-danger'>Hapus</button></a>   
-                       <a href='hapus_tempat.php?id_tempat=".$data['id_tempat']."'><button type='button' class='btn btn-primary'>Lihat</button></a> </td>";
+                       <a href='edit_user_admin.php?id_user=".$data['id_user']."'><button type='button' class='btn btn-warning'>Edit</button></a> 
+                       <a href='index.php?id_user=".$data['id_user']."'><button type='button' class='btn btn-danger'>Hapus</button></a>   
+                       <a href='hapus_user.php?id_user=".$data['id_user']."'><button type='button' class='btn btn-primary'>Lihat</button></a> </td>";
                echo "</tr>";
-               $i++;
+               ;
            endwhile;
            ?>
            </tbody>

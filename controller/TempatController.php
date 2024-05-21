@@ -5,12 +5,12 @@ class TempatController
 
     public function storeTempat($koneksi)
     {
-        $nama_tempat = $_POST['nama_tempat'];
-        $id_user = $_SESSION['id_user'];
-        $deskripsi = $_POST['deskripsi_tempat'];
-        $lokasi = $_POST['lokasi_tempat'];
+        $nama_tempat = htmlspecialchars($_POST['nama_tempat']);
+        $id_user = htmlspecialchars($_SESSION['id_user']);
+        $deskripsi = htmlspecialchars($_POST['deskripsi_tempat']);
+        $lokasi = htmlspecialchars($_POST['lokasi_tempat']);
 
-        $foto_tempat = rand(0, 9999) . $_FILES['foto_tempat']['name'];
+        $foto_tempat = rand(0, 9999) .htmlspecialchars( $_FILES['foto_tempat']['name']);
         $tmp = $_FILES['foto_tempat']['tmp_name'];
         $absolute_path = __DIR__ . '/../admin/tempat/img/' . $foto_tempat;
         $size = $_FILES['foto_tempat']['size'];
@@ -38,12 +38,12 @@ class TempatController
 
     function updateTempat($koneksi)
     {
-        $id_tempat = $_POST['id_tempat'];
-        $nama_tempat = $_POST['nama_tempat'];
-        $deskripsi = $_POST['deskripsi_tempat'];
-        $lokasi = $_POST['lokasi_tempat'];
+        $id_tempat = htmlspecialchars($_POST['id_tempat']);
+        $nama_tempat = htmlspecialchars($_POST['nama_tempat']);
+        $deskripsi = htmlspecialchars($_POST['deskripsi_tempat']);
+        $lokasi = htmlspecialchars($_POST['lokasi_tempat']);
 
-        $foto_tempat_baru = $_FILES['foto_tempat_baru']['name'];
+        $foto_tempat_baru = htmlspecialchars($_FILES['foto_tempat_baru']['name']);
         $tmp = $_FILES['foto_tempat_baru']['tmp_name'];
         $path = __DIR__ . "/../admin/tempat/img/" . $foto_tempat_baru;
         $size = $_FILES['foto_tempat_baru']['size'];

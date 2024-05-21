@@ -8,9 +8,9 @@ class UserController
         return;
     }
 
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-    $email = $_POST['email'];
+    $username = htmlspecialchars($_POST['username']);
+    $password = htmlspecialchars($_POST['password']);
+    $email = htmlspecialchars($_POST['email']);
     $role = 'costomer'; // Sesuaikan dengan enum di tabel
 
     // Proses upload gambar
@@ -58,8 +58,8 @@ class UserController
             return;
         }
 
-        $username = $_POST['username'];
-        $password = $_POST['password'];
+        $username = htmlspecialchars($_POST['username']);
+        $password =htmlspecialchars ($_POST['password']);
 
         //mengunakan prepared statement untuk menghindari sql injection
         $stmt = $koneksi->prepare("SELECT * FROM user WHERE username = ?");
@@ -101,5 +101,48 @@ class UserController
     {
         session_start();
         session_destroy();
+    }
+
+    public function deleteUser($koneksi)
+    {
+        // Mendapatkan id_user dari query string
+        $id_user = $_GET['id_user'];
+
+        // Mencari nama file gambar yang berhubungan dengan id_user
+        $result = $koneksi->query("SELECT gambar_user FROM user WHERE id_user = '$id_user'");
+        if ($result) {
+            $row = $result->fetch_assoc();
+            $gambar_user = $row['gambar_user'];
+
+            // Menghapus gambar dari direktori
+            $file_path = __DIR__."/../assets/img/" . $gambar_user;
+            if (file_exists($file_path)) {
+                unlink($file_path);
+            } else {
+                throw new Exception("File not found: " . $file_path);
+            }
+
+            $query = $koneksi->query("DELETE FROM user WHERE id_user = '$id_user'");
+            if ($query) {
+                return mysqli_affected_rows($koneksi);
+            } else {
+                throw new Exception("Error executing query: " . $koneksi->error);
+            }
+        } else {
+            throw new Exception("Error executing query: " . $koneksi->error);
+        }
+    }
+
+    public function updateUserAdmin($koneksi)
+    {
+        $id_user = htmlspecialchars($_POST['id_user']);
+        $role = htmlspecialchars($_POST['role']);
+
+        $query = $koneksi->query("UPDATE `user` SET `role` = '$role' WHERE `user`.`id_user` = '$id_user'");
+        if ($query) {
+            return mysqli_affected_rows($koneksi);
+        } else {
+            throw new Exception("Error executing query: " . $koneksi->error);
+        }
     }
 }
