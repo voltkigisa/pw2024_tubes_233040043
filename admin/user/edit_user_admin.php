@@ -51,7 +51,7 @@ if ($_SESSION['role'] !== 'admin') {
         <label for="role" class="form-label">Role</label>
         <select class="form-select" id="role" name="role" required>
             <option value="admin" <?php echo isset($data) && $data['role'] === 'admin' ? 'selected' : ''; ?>>Admin</option>
-            <option value="user" <?php echo isset($data) && $data['role'] === 'costomer' ? 'selected' : ''; ?>>Customer</option>
+            <option value="costomer" <?php echo isset($data) && $data['role'] === 'costomer' ? 'selected' : ''; ?>>Customer</option>
         </select>
     </div>
     

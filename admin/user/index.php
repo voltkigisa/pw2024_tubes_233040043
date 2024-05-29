@@ -39,11 +39,9 @@
        <div id="search-results"></div>
 
        <form id="search-form" class="input-group mb-3" >
-           <input type="text" name="search" placeholder="Search" class="input-group-text search" id="search">
-           <button type="submit" class="btn btn-primary" id="tombolCari">Search</button>
-       </form>
+           <input type="text" name="search" placeholder="Search" class="input-group-text search" id="search-user">       </form>
 
-       <div id="table">
+       <div id="table-user">
        <table class="table table-dark table-striped table-responsive table table-hover table-bordered tableku">
            <thead>
            <tr>
@@ -71,7 +69,7 @@
                echo "<td>
                        <a href='edit_user_admin.php?id_user=".$data['id_user']."'><button type='button' class='btn btn-warning'>Edit</button></a> 
                        <a href='index.php?id_user=".$data['id_user']."'><button type='button' class='btn btn-danger'>Hapus</button></a>   
-                       <a href='hapus_user.php?id_user=".$data['id_user']."'><button type='button' class='btn btn-primary'>Lihat</button></a> </td>";
+                        </td>";
                echo "</tr>";
                ;
            endwhile;
@@ -81,6 +79,4 @@
        </div>
 
    <?php include '../layout/footer.php'?>
-<!-- </body>
-</html> -->
    

@@ -39,11 +39,10 @@
         <a href="create_tempat.php"><button type="button" class="btn btn-success my-3">+ tambah</button></a>
 
         <form id="search-form" class="input-group mb-3" >
-            <input type="text" name="search" placeholder="Search" class="input-group-text search" id="search">
-            <button type="submit" class="btn btn-primary" id="tombolCari">Search</button>
+            <input type="text" name="search" placeholder="Search" class="input-group-text search" id="search-tempat">
         </form>
 
-        <div id="table">
+        <div id="table-tempat">
         <table class="table table-dark table-striped table-responsive table table-hover table-bordered tableku">
             <thead>
             <tr>

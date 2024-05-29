@@ -1,23 +1,47 @@
 // console.log('ok');
 
-//ambil elemen yang dibutuhkan
-var search = document.getElementById('search');
-var table = document.getElementById('table');
-var tombolCari = document.getElementById('tombolCari');
+//ambil elemen yang dibutuhkan untuk tempat wisata
+var searchTempat = document.getElementById('search-tempat');
+var tableTempat = document.getElementById('table-tempat');
 
-//tambahkan event ketika keyword ditulis
-search.addEventListener('keyup', function(){
-    //buat object ajax
-    var xhr = new XMLHttpRequest();
+//cek apakah elemen tersebut ada di halaman
+if (searchTempat && tableTempat) {
+    searchTempat.addEventListener('keyup', function(){
+        //buat object ajax
+        var xhr = new XMLHttpRequest();
 
-    //cek kesiapan ajax
-    xhr.onreadystatechange = function(){
-        if(xhr.readyState == 4 && xhr.status == 200){
-            table.innerHTML = xhr.responseText;
+        //cek kesiapan ajax
+        xhr.onreadystatechange = function(){
+            if(xhr.readyState == 4 && xhr.status == 200){
+                tableTempat.innerHTML = xhr.responseText;
+            }
         }
-    }
 
-    //eksekusi ajax
-    xhr.open('GET', '/pw2024_tubes_233040043/views/search.php?search='+ search.value, true);
-    xhr.send();
-});
+        //eksekusi ajax
+        xhr.open('GET', '/pw2024_tubes_233040043/views/search.php?search=' + searchTempat.value, true);
+        xhr.send();
+    });
+}
+
+//ambil elemen yang dibutuhkan untuk user
+var searchUser = document.getElementById('search-user');
+var tableUser = document.getElementById('table-user');
+
+//cek apakah elemen tersebut ada di halaman
+if (searchUser && tableUser) {
+    searchUser.addEventListener('keyup', function(){
+        //buat object ajax
+        var xhr = new XMLHttpRequest();
+
+        //cek kesiapan ajax
+        xhr.onreadystatechange = function(){
+            if(xhr.readyState == 4 && xhr.status == 200){
+                tableUser.innerHTML = xhr.responseText;
+            }
+        }
+
+        //eksekusi ajax
+        xhr.open('GET', '/pw2024_tubes_233040043/views/searchDataUser.php?search=' + searchUser.value, true);
+        xhr.send();
+    });
+}
