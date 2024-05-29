@@ -132,7 +132,6 @@ class UserController
             throw new Exception("Error executing query: " . $koneksi->error);
         }
     }
-
     public function updateUserAdmin($koneksi)
     {
         $id_user = htmlspecialchars($_POST['id_user']);
