@@ -33,6 +33,29 @@
        unset($_SESSION['pesan']);
    }
 
+   // Pagination logic
+$limit = 5; // Jumlah data perhalaman
+
+//hitung jumlah total data
+$total_query = $koneksi->query("SELECT COUNT(*) AS total FROM user");
+$total_data = $total_query->fetch_assoc()['total'];
+
+//hitung total jumlah alaman
+$total_pages = ceil($total_data / $limit);
+
+//tentukan halaman saat ini
+$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+$current_page = $page;
+
+//hitung offset data
+$offset = ($page - 1) * $limit;
+
+// Queri database dengan limit dan offset
+$query = $koneksi->query("SELECT * FROM user LIMIT $limit OFFSET $offset");
+
+// nomor urut
+$no = ($page - 1) * $limit + 1;
+
    ?>
 
 <div id="search-results" class="container mt-3"></div>
@@ -57,7 +80,6 @@
            <?php
            
            
-           $query =$koneksi ->query("SELECT * FROM user");
            $i=1;
            while ($data = $query->fetch_assoc()):
                echo "<tr>";
@@ -77,6 +99,17 @@
            </tbody>
        </table>
        </div>
+
+             <!-- Pagination Links -->
+<nav aria-label="page navigation">
+    <ul class="pagination justify-content-center">
+        <?php for($i = 1; $i <= $total_pages; $i++):?>
+            <li class="page-item <?=($i == $current_page) ? 'active' : ''  ?>">
+                <a href="?page=<?= $i; ?>" class="page-link"><?= $i; ?></a>
+         </li>
+         <?php endfor; ?>
+    </ul>
+</nav>
 
    <?php include '../layout/footer.php'?>
    
