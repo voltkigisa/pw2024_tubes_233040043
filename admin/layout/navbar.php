@@ -27,6 +27,7 @@ $profilePath = '/pw2024_tubes_233040043/views/profile/profile.php';
 $userPath = '/pw2024_tubes_233040043/admin/user/index.php';
 $tempatPath = '/pw2024_tubes_233040043/admin/tempat/index.php';
 $customerPath = '/pw2024_tubes_233040043/views/customer/index.php';
+$pdfPath = '/pw2024_tubes_233040043/controller/PdfController.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -34,7 +35,7 @@ $customerPath = '/pw2024_tubes_233040043/views/customer/index.php';
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>YasumiPort | Admin Dashboard</title>
+  <title>YasumiPort</title>
 
   <!-- CDN bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">

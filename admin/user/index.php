@@ -61,6 +61,9 @@ $no = ($page - 1) * $limit + 1;
 <div id="search-results" class="container mt-3"></div>
        <div id="search-results"></div>
 
+       <!-- pdf reporting -->
+       <a href="<?= $pdfPath ?>?report=user" target="_blank"><button type="button" class="btn btn-danger my-3 pdf">Export PDF</button></a>
+       
        <form id="search-form" class="input-group mb-3" >
            <input type="text" name="search" placeholder="Search" class="input-group-text search" id="search-user">       </form>
 
