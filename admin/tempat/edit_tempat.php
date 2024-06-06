@@ -32,7 +32,7 @@ if ($_SESSION['role'] !== 'admin') {
 <br>
 <div class='mb-3 d-flex flex-column'>
     <label for="foto_tempat_lama" class="form-label ">Foto Tempat Lama</label>
-    <img src="img/<?php echo isset($data) ? $data['foto_tempat'] : ''; ?>" class="img img-thumbnail" alt="" style="max-width: 350px; max-height: 350px;">
+    <img src="img/<?= isset($data) ? $data['foto_tempat'] : ''; ?>" class="img img-thumbnail" alt="" style="max-width: 350px; max-height: 350px;">
 </div>
 
     <form method="POST" enctype="multipart/form-data" action="">

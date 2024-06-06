@@ -42,22 +42,47 @@ class TempatController
         $nama_tempat = htmlspecialchars($_POST['nama_tempat']);
         $deskripsi = htmlspecialchars($_POST['deskripsi_tempat']);
         $lokasi = htmlspecialchars($_POST['lokasi_tempat']);
-
-        $foto_tempat_baru = htmlspecialchars($_FILES['foto_tempat_baru']['name']);
-        $tmp = $_FILES['foto_tempat_baru']['tmp_name'];
-        $path = __DIR__ . "/../admin/tempat/img/" . $foto_tempat_baru;
-        $size = $_FILES['foto_tempat_baru']['size'];
-        $type = $_FILES['foto_tempat_baru']['type'];
-
-        if ($size < 1000000 && $type == 'image/jpeg' || $type == 'image/png' || $type == 'image/jpg') {
-            if (move_uploaded_file($tmp, $path)) {
-                $query = $koneksi->query("UPDATE `tempat_wisata` SET `nama_tempat` = '$nama_tempat', `deskripsi_tempat` = '$deskripsi', `lokasi_tempat` = '$lokasi', `foto_tempat` = '$foto_tempat_baru' WHERE `tempat_wisata`.`id_tempat` = '$id_tempat'");
-                if ($query) {
-                    return mysqli_affected_rows($koneksi);
+    
+        // Ambil foto lama dari database
+        $stmt = $koneksi->prepare("SELECT foto_tempat FROM tempat_wisata WHERE id_tempat = ?");
+        $stmt->bind_param("i", $id_tempat);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $tempat = $result->fetch_assoc();
+        $foto_tempat_lama = $tempat['foto_tempat'];
+        $stmt->close();
+    
+        // Periksa apakah ada foto baru yang diupload
+        if (!empty($_FILES['foto_tempat_baru']['name'])) {
+            $foto_tempat_baru = htmlspecialchars($_FILES['foto_tempat_baru']['name']);
+            $tmp = $_FILES['foto_tempat_baru']['tmp_name'];
+            $path = __DIR__ . "/../admin/tempat/img/" . $foto_tempat_baru;
+            $size = $_FILES['foto_tempat_baru']['size'];
+            $type = $_FILES['foto_tempat_baru']['type'];
+    
+            if ($size < 1000000 && ($type == 'image/jpeg' || $type == 'image/png' || $type == 'image/jpg')) {
+                if (!move_uploaded_file($tmp, $path)) {
+                    throw new Exception("Error saat mengupload file");
                 } else {
-                    throw new Exception("Error executing query: " . $koneksi->error);
+                    // Hapus foto lama dari penyimpanan
+                    $oldImagePath = __DIR__ . "/../admin/tempat/img/" . $foto_tempat_lama;
+                    if (file_exists($oldImagePath)) {
+                        unlink($oldImagePath);
+                    }
                 }
+            } else {
+                throw new Exception("Tipe atau ukuran file tidak valid");
             }
+        } else {
+            $foto_tempat_baru = $foto_tempat_lama;
+        }
+    
+        $query = $koneksi->prepare("UPDATE `tempat_wisata` SET `nama_tempat` = ?, `deskripsi_tempat` = ?, `lokasi_tempat` = ?, `foto_tempat` = ? WHERE `id_tempat` = ?");
+        $query->bind_param("ssssi", $nama_tempat, $deskripsi, $lokasi, $foto_tempat_baru, $id_tempat);
+        if ($query->execute()) {
+            return $query->affected_rows;
+        } else {
+            throw new Exception("Error saat menjalankan query: " . $query->error);
         }
     }
 

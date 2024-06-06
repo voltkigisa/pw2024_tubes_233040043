@@ -29,7 +29,7 @@ if (isset($_POST['logout'])) {
                         <h5 class="mt-3"><?= htmlspecialchars($data['username'] ?? 'N/A'); ?></h5>
                         <p>Email: <?= htmlspecialchars($data['email'] ?? 'N/A'); ?></p>
                         <p>Role: <?= htmlspecialchars($data['role'] ?? 'N/A'); ?></p>
-                        <a href="#" class="btn btn-primary">Edit Profil</a>
+                        <a href="edit_profile.php?id_user=<?= $id_user ?>" class="btn btn-primary">Edit Profil</a>
                         <form method="POST" action="">
                             <button type="submit" name="logout" class="btn btn-danger mt-2">Logout</button>
                         </form>

@@ -144,4 +144,53 @@ class UserController
             throw new Exception("Error executing query: " . $koneksi->error);
         }
     }
+
+    public function updateProfile($koneksi)
+    {
+        $id_user = htmlspecialchars($_POST['id_user']);
+        $username = htmlspecialchars($_POST['username']);
+        $email = htmlspecialchars($_POST['email']);
+    
+        // Ambil gambar lama dari database
+        $stmt = $koneksi->prepare("SELECT gambar_user FROM user WHERE id_user = ?");
+        $stmt->bind_param("i", $id_user);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $user = $result->fetch_assoc();
+        $gambar_user_lama = $user['gambar_user'];
+        $stmt->close();
+    
+        // Periksa apakah ada gambar baru yang diupload
+        if (!empty($_FILES['gambar_user_baru']['name'])) {
+            $gambar_user_baru = htmlspecialchars($_FILES['gambar_user_baru']['name']);
+            $tmp = $_FILES['gambar_user_baru']['tmp_name'];
+            $path = __DIR__ . "/../assets/img/" . $gambar_user_baru;
+            $size = $_FILES['gambar_user_baru']['size'];
+            $type = $_FILES['gambar_user_baru']['type'];
+    
+            if ($size < 1000000 && ($type == 'image/jpeg' || $type == 'image/png' || $type == 'image/jpg')) {
+                if (!move_uploaded_file($tmp, $path)) {
+                    throw new Exception("Error uploading file");
+                } else {
+                    // Hapus gambar lama dari penyimpanan
+                    $oldImagePath = __DIR__ . "/../assets/img/" . $gambar_user_lama;
+                    if (file_exists($oldImagePath)) {
+                        unlink($oldImagePath);
+                    }
+                }
+            } else {
+                throw new Exception("Invalid file type or size");
+            }
+        } else {
+            $gambar_user_baru = $gambar_user_lama;
+        }
+    
+        $query = $koneksi->prepare("UPDATE `user` SET `username` = ?, `email` = ?, `gambar_user` = ? WHERE `user`.`id_user` = ?");
+        $query->bind_param("sssi", $username, $email, $gambar_user_baru, $id_user);
+        if ($query->execute()) {
+            return $query->affected_rows;
+        } else {
+            throw new Exception("Error executing query: " . $query->error);
+        }
+    }
 }

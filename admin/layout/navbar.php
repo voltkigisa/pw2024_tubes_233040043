@@ -26,7 +26,7 @@ $loginPath = '/pw2024_tubes_233040043/views/login/login.php';
 $profilePath = '/pw2024_tubes_233040043/views/profile/profile.php';
 $userPath = '/pw2024_tubes_233040043/admin/user/index.php';
 $tempatPath = '/pw2024_tubes_233040043/admin/tempat/index.php';
-$customerPath = '/pw2024_tubes_233040043/views/customer/index.php';
+$customerPath = '/pw2024_tubes_233040043/index.php';
 $pdfPath = '/pw2024_tubes_233040043/controller/PdfController.php';
 ?>
 <!DOCTYPE html>
@@ -45,7 +45,7 @@ $pdfPath = '/pw2024_tubes_233040043/controller/PdfController.php';
 <body>
   <nav class="navbar navbar-expand-lg bg-light">
     <div class="container-fluid">
-      <a class="navbar-brand" href="<?= $customerPath ?>">Navbar</a>
+      <a class="navbar-brand" href="<?= $customerPath ?>">YasumiPort</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -53,36 +53,17 @@ $pdfPath = '/pw2024_tubes_233040043/controller/PdfController.php';
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <?php if(isset($_SESSION['role']) && $_SESSION['role'] === 'admin') { ?>
           <li class="nav-item">
-            <a class="nav-link <?= setActiveClass('home', $activePage); ?>" aria-current="page" href="<?= $tempatPath ?>"> Data Tempat Wisata</a>
+            <a class="nav-link <?= setActiveClass('homeCustomer', $activePage); ?>" aria-current="page" href="<?= $customerPath ?>"> Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link <?= setActiveClass('tempatwisata', $activePage); ?>" aria-current="page" href="<?= $tempatPath ?>"> Data Tempat Wisata</a>
           </li>
           <li class="nav-item">
             <a class="nav-link <?= setActiveClass('user', $activePage); ?>" href="<?= $userPath ?>">Data User</a>
           </li>
-          <?php }elseif (!isset($_SESSION['role']) || $_SESSION['role'] === 'costomer' ){ ?>
-          <li class="nav-item">
-            <a class="nav-link <?= setActiveClass('homeCustomer', $activePage); ?>" aria-current="page" href="<?= $customerPath ?>"> Home</a>
-          </li>
-          <?php } ?>
-
-          <li class="nav-item">
-            <a class="nav-link" href="#">Pricing</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Dropdown link
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
-            </ul>
-          </li>
+          <?php }?>
         </ul>
-<!-- 
-        <form class="d-flex" role="search" id="search-form">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="search-input">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form> -->
+       
         <!-- ini login logout dan profile -->
         <form method="POST" action="">
           <ul class="navbar-nav ">
