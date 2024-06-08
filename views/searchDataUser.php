@@ -3,7 +3,7 @@ include '../controller/koneksi.php';
 
 $search = $_GET['search'];
 
-$query = $koneksi->query($query = "SELECT * FROM user
+$query = $koneksi->query( "SELECT * FROM user
 WHERE
 username LIKE '%$search%' OR
 email LIKE '%$search%'

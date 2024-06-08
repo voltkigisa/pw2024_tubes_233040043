@@ -57,8 +57,6 @@ $no = ($page - 1) * $limit + 1;
 
     ?>
 
-<div id="search-results" class="container mt-3"></div>
-        <div id="search-results"></div>
         <a href="create_tempat.php"><button type="button" class="btn btn-success my-3 mx-1">+ tambah</button></a>
             <a href="<?= $pdfPath ?>?report=tempatWisata" target="_blank"><button type="button" class="btn btn-danger my-3 pdf">Export PDF</button></a>
 

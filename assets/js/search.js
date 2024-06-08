@@ -45,3 +45,26 @@ if (searchUser && tableUser) {
         xhr.send();
     });
 }
+
+//ambil elemen yang dibutuhkan untuk user
+var searchCostumer = document.getElementById('search-costumer');
+var cardTempat = document.getElementById('card-tempat');
+
+//cek apakah elemen tersebut ada di halaman
+if (searchCostumer && cardTempat) {
+    searchCostumer.addEventListener('keyup', function(){
+        //buat object ajax
+        var xhr = new XMLHttpRequest();
+
+        //cek kesiapan ajax
+        xhr.onreadystatechange = function(){
+            if(xhr.readyState == 4 && xhr.status == 200){
+                cardTempat.innerHTML = xhr.responseText;
+            }
+        }
+
+        //eksekusi ajax
+        xhr.open('GET', '/pw2024_tubes_233040043/views/searchCostumer.php?search=' + searchCostumer.value, true);
+        xhr.send();
+    });
+}

@@ -4,7 +4,7 @@ include '../controller/koneksi.php';
 
 $search = $_GET['search'];
 
-$query = $koneksi->query($query = "SELECT * FROM tempat_wisata
+$query = $koneksi->query("SELECT * FROM tempat_wisata
 WHERE
 nama_tempat LIKE '%$search%' OR
 lokasi_tempat LIKE '%$search%' OR
