@@ -16,14 +16,6 @@
        if($_SESSION['status'] != 'login'){
            header('Location: ../../views/login/login.php');
        }
-       $result = $userController->deleteUser($koneksi);
-       if($result > 0){
-           $_SESSION['pesan'] = "Data berhasil dihapus";
-       }else{
-           $_SESSION['pesan'] = "Data gagal dihapus";
-       }
-       header('Location: index.php');
-       exit();
    }
 
    if(isset($_SESSION['pesan'])){
@@ -92,9 +84,7 @@ $no = ($page - 1) * $limit + 1;
                echo "<td>".$data['email']."</td>";
                 echo "<td>".$data['role']."</td>";
                echo "<td>
-                       <a href='edit_user_admin.php?id_user=".$data['id_user']."'><button type='button' class='btn btn-warning'>Edit</button></a> 
-                       <a href='index.php?id_user=".$data['id_user']."'><button type='button' class='btn btn-danger'>Hapus</button></a>   
-                        </td>";
+                       <a href='edit_user_admin.php?id_user=".$data['id_user']."'><button type='button' class='btn btn-warning'><i class='bi bi-pen'></i></button></a>                         </td>";
                echo "</tr>";
                ;
            endwhile;

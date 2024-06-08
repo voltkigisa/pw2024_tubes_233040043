@@ -92,9 +92,9 @@ $no = ($page - 1) * $limit + 1;
                 echo "<td><img src='img/".$data['foto_tempat']."' width='200px' height='200px'></td>";
                 echo "<td>".$data['nama_tempat']."</td>";
                 echo "<td>
-                        <a href='edit_tempat.php?id_tempat=".$data['id_tempat']."'><button type='button' class='btn btn-warning'>Edit</button></a> 
-                        <a href='index.php?id_tempat=".$data['id_tempat']."'><button type='button' class='btn btn-danger'>Hapus</button></a>   
-                        <a href='hapus_tempat.php?id_tempat=".$data['id_tempat']."'><button type='button' class='btn btn-primary'>Lihat</button></a> </td>";
+                        <a href='edit_tempat.php?id_tempat=".$data['id_tempat']."'><button type='button' class='btn btn-warning'><i class='bi bi-pen'></i></button></a> 
+                        <a href='index.php?id_tempat=".$data['id_tempat']."'><button type='button' class='btn btn-danger'><i class='bi bi-trash3'></i></button></a>   
+                        <a href='hapus_tempat.php?id_tempat=".$data['id_tempat']."'><button type='button' class='btn btn-primary'><i class='bi bi-eye'></i></button></a> </td>";
                 echo "</tr>";
                 ;
             endwhile;

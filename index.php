@@ -1,5 +1,12 @@
 <?php 
 include 'admin/layout/navbar.php';
+
+if(isset($_SESSION['pesan'])){
+    echo "<div class='alert alert-success alert-dismissible mt-3'>"
+    .$_SESSION['pesan'].
+    "<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
+    unset($_SESSION['pesan']);
+}
 ?>
 
 

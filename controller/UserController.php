@@ -34,19 +34,18 @@ class UserController
 
                 $stmt->bind_param("sssss", $username, $passwordHash, $email, $gambar_user, $role);
                 if ($stmt->execute()) {
-                    header('Location: ../login/login.php');
+                        $_SESSION['pesan'] = "Berhasil register";
+                        header('Location: ../login/login.php'); // Redirect ke halaman login
                     return mysqli_affected_rows($koneksi);
                 } else {
                     throw new Exception("Error executing query: " . $stmt->error);
                 }
-            } else {
-                echo "<script>alert('Gagal mengupload gambar')</script>";
-            }
+            } 
         } else {
-            echo "<script>alert('Ukuran atau tipe gambar tidak sesuai')</script>";
+            $_SESSION['error'] = 'Ukuran atau tipe gambar tidak sesuai';
         }
     } else {
-        echo "<script>alert('Gambar harus diupload')</script>";
+        $_SESSION['error'] = 'Gambar harus diupload';
     }
 }
 
@@ -84,9 +83,10 @@ class UserController
             // Redirect sesuai dengan role
             if ($_SESSION['role'] == 'admin') {
                 header('Location: ../../admin/tempat/index.php');
-                $_SESSION['pesan'] = "Berhasil login";
+                $_SESSION['pesan'] = "Berhasil Login";
             } else {
                 header('Location: ../../index.php');
+                $_SESSION['pesan'] = "Berhasil Login";
             }
             exit();
         } else {
@@ -103,35 +103,6 @@ class UserController
         session_destroy();
     }
 
-    public function deleteUser($koneksi)
-    {
-        // Mendapatkan id_user dari query string
-        $id_user = $_GET['id_user'];
-
-        // Mencari nama file gambar yang berhubungan dengan id_user
-        $result = $koneksi->query("SELECT gambar_user FROM user WHERE id_user = '$id_user'");
-        if ($result) {
-            $row = $result->fetch_assoc();
-            $gambar_user = $row['gambar_user'];
-
-            // Menghapus gambar dari direktori
-            $file_path = __DIR__."/../assets/img/" . $gambar_user;
-            if (file_exists($file_path)) {
-                unlink($file_path);
-            } else {
-                throw new Exception("File not found: " . $file_path);
-            }
-
-            $query = $koneksi->query("DELETE FROM user WHERE id_user = '$id_user'");
-            if ($query) {
-                return mysqli_affected_rows($koneksi);
-            } else {
-                throw new Exception("Error executing query: " . $koneksi->error);
-            }
-        } else {
-            throw new Exception("Error executing query: " . $koneksi->error);
-        }
-    }
     public function updateUserAdmin($koneksi)
     {
         $id_user = htmlspecialchars($_POST['id_user']);
