@@ -1,14 +1,14 @@
 <?php include '../layout/navbar.php';
 
-if ($_SESSION['role'] !== 'admin') {
-    header('Location: ../../views/tolak/bukanAdmin.php'); // Buat halaman akses_ditolak.php yang memberi tahu pengguna bahwa akses ditolak
-    exit();
-}
+if(isset($_GET ['id_tempat'])){
+    $id_tempat = $_GET['id_tempat'];
+    $query = $koneksi->query("SELECT * FROM tempat_wisata WHERE id_tempat = '$id_tempat'");
+    $data = $query->fetch_assoc();
+    }
 
-    if(isset($_GET ['id_tempat'])){
-        $id_tempat = $_GET['id_tempat'];
-        $query = $koneksi->query("SELECT * FROM tempat_wisata WHERE id_tempat = '$id_tempat'");
-        $data = $query->fetch_assoc();
+if ($_SESSION['role'] !== 'admin' && $_SESSION['id_user'] != $data['id_user']) {
+        header('Location: ../../views/tolak/tolak.php'); // Buat halaman akses_ditolak.php yang memberi tahu pengguna bahwa akses ditolak
+        exit();
     }
 
     if(isset($_POST['submit'])){
@@ -21,7 +21,11 @@ if ($_SESSION['role'] !== 'admin') {
         }else{
             $_SESSION['pesan'] = "Data gagal diubah";
         }
+        if($_SESSION['role']=="admin"){
         header('Location: index.php');
+        }else{
+            header('Location: ../../index.php');
+        }
     
     }
 

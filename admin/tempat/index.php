@@ -6,7 +6,7 @@
     }
 
     if ($_SESSION['role'] !== 'admin') {
-        header('Location: ../../views/tolak/bukanAdmin.php'); // Buat halaman akses_ditolak.php yang memberi tahu pengguna bahwa akses ditolak
+        header('Location: ../../views/tolak/tolak.php'); // Buat halaman akses_ditolak.php yang memberi tahu pengguna bahwa akses ditolak
         exit();
     }
 
@@ -92,7 +92,7 @@ $no = ($page - 1) * $limit + 1;
                 echo "<td>
                         <a href='edit_tempat.php?id_tempat=".$data['id_tempat']."'><button type='button' class='btn btn-warning'><i class='bi bi-pen'></i></button></a> 
                         <a href='index.php?id_tempat=".$data['id_tempat']."'><button type='button' class='btn btn-danger'><i class='bi bi-trash3'></i></button></a>   
-                        <a href='hapus_tempat.php?id_tempat=".$data['id_tempat']."'><button type='button' class='btn btn-primary'><i class='bi bi-eye'></i></button></a> </td>";
+                        <a href='?id_tempat=".$data['id_tempat']."'><button type='button' class='btn btn-primary'><i class='bi bi-eye'></i></button></a> </td>";
                 echo "</tr>";
                 ;
             endwhile;

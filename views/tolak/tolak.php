@@ -16,8 +16,8 @@
                     </div>
                     <div class="card-body">
                         <h5 class="card-title">Anda Tidak Memiliki Hak Akses</h5>
-                        <p class="card-text">Halaman ini hanya dapat diakses oleh pengguna dengan role admin.</p>
-                        <a href="../login/login.php" class="btn btn-primary">Kembali ke Halaman Login</a>
+                        <p class="card-text">Halaman ini hanya dapat diakses oleh pengguna dengan role admin atau yang membuat data.</p>
+                        <a href="../../index.php" class="btn btn-primary">Kembali ke Halaman Utama</a>
                     </div>
                 </div>
             </div>

@@ -2,6 +2,8 @@
 
 include 'admin/layout/navbar.php';
 
+$userId = isset($_SESSION['id_user']) ? $_SESSION['id_user'] : null;
+
 if(isset($_SESSION['pesan'])){
     echo "<div class='alert alert-success alert-dismissible mt-3'>"
     .$_SESSION['pesan'].
@@ -9,7 +11,21 @@ if(isset($_SESSION['pesan'])){
     unset($_SESSION['pesan']);
 }
 
-$query = $koneksi->query("SELECT * FROM tempat_wisata")
+$query = $koneksi->query("SELECT * FROM tempat_wisata");
+
+if(isset($_GET['id_tempat'])){
+    if(!isset($_SESSION['id_user'])){
+        header('Location: ../../views/login/login.php');
+    }
+    $result = $tempatController->deleteTempat($koneksi);
+    if($result > 0){
+        $_SESSION['pesan'] = "Data berhasil dihapus";
+    }else{
+        $_SESSION['pesan'] = "Data gagal dihapus";
+    }
+    header('Location: index.php');
+    exit();
+}
 ?>
 
 
@@ -42,7 +58,10 @@ $query = $koneksi->query("SELECT * FROM tempat_wisata")
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
                   <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                  <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                  <?php if ($userId && $data['id_user'] == $userId):?>
+                  <a href="admin/tempat/edit_tempat.php?id_tempat=<?= $data['id_tempat'] ?>"><button type="button" class="btn btn-sm btn-outline-secondary">Edit</button></a>
+                  <a href="?id_tempat=<?= $data['id_tempat'] ?>"><button type="button" class="btn btn-sm btn-outline-secondary">Hapus</button></a>
+                  <?php endif; ?>
                 </div>
               </div>
             </div>
