@@ -1,7 +1,7 @@
 <?php include '../layout/navbar.php';
 
-if ($_SESSION['role'] !== 'admin') {
-    header('Location: ../../views/tolak/bukanAdmin.php'); // Buat halaman akses_ditolak.php yang memberi tahu pengguna bahwa akses ditolak
+if (!isset($_SESSION['username'])) {
+    header('Location: ../../views/login/login.php');
     exit();
 }
 
@@ -15,7 +15,11 @@ if(isset($_POST['submit'])){
     }else{
         $_SESSION['pesan'] = "Data gagal ditambahkan";
     }
-    header('Location: index.php');
+    if($_SESSION['role']=="admin"){
+        header('Location: index.php');
+        }else{
+            header('Location: ../../index.php');
+        }
 
 }
 

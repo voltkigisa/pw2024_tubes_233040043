@@ -1,4 +1,8 @@
 <?php include '../layout/navbar.php';
+ if (!isset($_SESSION['username'])) {
+    header('Location: ../../views/login/login.php');
+    exit();
+}
 
 if ($_SESSION['role'] !== 'admin') {
     header('Location: ../../views/tolak/bukanAdmin.php'); // Buat halaman akses_ditolak.php yang memberi tahu pengguna bahwa akses ditolak

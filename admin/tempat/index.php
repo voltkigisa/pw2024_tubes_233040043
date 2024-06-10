@@ -33,7 +33,7 @@
     }
 
     // Pagination logic
-$limit = 5; // Jumlah data perhalaman
+$limit = 10; // Jumlah data perhalaman
 
 //hitung jumlah total data
 $total_query = $koneksi->query("SELECT COUNT(*) AS total FROM tempat_wisata");
@@ -58,7 +58,7 @@ $no = ($page - 1) * $limit + 1;
     ?>
 
         <a href="create_tempat.php"><button type="button" class="btn btn-success my-3 mx-1">+ tambah</button></a>
-            <a href="<?= $pdfPath ?>?report=tempatWisata" target="_blank"><button type="button" class="btn btn-danger my-3 pdf">Export PDF</button></a>
+        <a href="<?= $pdfPath ?>?report=tempatWisata" target="_blank"><button type="button" class="btn btn-danger my-3 pdf">Export PDF</button></a>
 
         <form id="search-form" class="input-group mb-3" >
             <input type="text" name="search" placeholder="Search" class="input-group-text search" id="search-tempat">
@@ -87,12 +87,12 @@ $no = ($page - 1) * $limit + 1;
             while ($data = $query->fetch_assoc()):
                 echo "<tr>";
                 echo "<td>".$i++."</td>";
-                echo "<td><img src='img/".$data['foto_tempat']."' width='200px' height='200px'></td>";
-                echo "<td>".$data['nama_tempat']."</td>";
+                echo "<td><img src='img/".htmlspecialchars($data['foto_tempat'])."' style='max-width: 400px; max-height: 400px;'></td>";
+                echo "<td>".htmlspecialchars($data['nama_tempat'])."</td>";
                 echo "<td>
-                        <a href='edit_tempat.php?id_tempat=".$data['id_tempat']."'><button type='button' class='btn btn-warning'><i class='bi bi-pen'></i></button></a> 
-                        <a href='index.php?id_tempat=".$data['id_tempat']."'><button type='button' class='btn btn-danger'><i class='bi bi-trash3'></i></button></a>   
-                        <a href='?id_tempat=".$data['id_tempat']."'><button type='button' class='btn btn-primary'><i class='bi bi-eye'></i></button></a> </td>";
+                        <a href='edit_tempat.php?id_tempat=".htmlspecialchars($data['id_tempat'])."'><button type='button' class='btn btn-warning'><i class='bi bi-pen'></i></button></a> 
+                        <a href='index.php?id_tempat=".htmlspecialchars($data['id_tempat'])."'><button type='button' class='btn btn-danger'><i class='bi bi-trash3'></i></button></a>   
+                        <a href='?id_tempat=".htmlspecialchars($data['id_tempat'])."'><button type='button' class='btn btn-primary'><i class='bi bi-eye'></i></button></a> </td>";
                 echo "</tr>";
                 ;
             endwhile;

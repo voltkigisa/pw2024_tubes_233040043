@@ -54,7 +54,7 @@ class TempatController
     
         // Periksa apakah ada foto baru yang diupload
         if (!empty($_FILES['foto_tempat_baru']['name'])) {
-            $foto_tempat_baru = htmlspecialchars($_FILES['foto_tempat_baru']['name']);
+            $foto_tempat_baru = rand(0, 9999) .htmlspecialchars($_FILES['foto_tempat_baru']['name']);
             $tmp = $_FILES['foto_tempat_baru']['tmp_name'];
             $path = __DIR__ . "/../admin/tempat/img/" . $foto_tempat_baru;
             $size = $_FILES['foto_tempat_baru']['size'];

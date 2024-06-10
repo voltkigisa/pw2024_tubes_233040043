@@ -86,14 +86,14 @@ $no = ($page - 1) * $limit + 1;
            while ($data = $query->fetch_assoc()):
                echo "<tr>";
                echo "<td>".$i++."</td>";
-               echo "<td><img src='../../assets/img/".$data['gambar_user']."' width='200px' height='200px'></td>";
-               echo "<td>".$data['username']."</td>";
-               echo "<td>".$data['email']."</td>";
-                echo "<td>".$data['role']."</td>";
+               echo "<td><img src='../../assets/img/".htmlspecialchars($data['gambar_user'])."' style='max-width: 400px; max-height: 400px;'></td>";
+               echo "<td>".htmlspecialchars($data['username'])."</td>";
+               echo "<td>".htmlspecialchars($data['email'])."</td>";
+                echo "<td>".htmlspecialchars($data['role'])."</td>";
                echo "<td>
-                       <a href='edit_user_admin.php?id_user=".$data['id_user']."'><button type='button' class='btn btn-warning'><i class='bi bi-pen'></i></button></a>                         </td>";
+                       <a href='edit_user_admin.php?id_user=".htmlspecialchars($data['id_user'])."'><button type='button' class='btn btn-warning'><i class='bi bi-pen'></i></button></a> 
+                    </td>";
                echo "</tr>";
-               ;
            endwhile;
            ?>
            </tbody>

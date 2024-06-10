@@ -1,5 +1,10 @@
 <?php include '../layout/navbar.php';
 
+if (!isset($_SESSION['username'])) {
+    header('Location: ../../views/login/login.php');
+    exit();
+}
+
 if(isset($_GET ['id_tempat'])){
     $id_tempat = $_GET['id_tempat'];
     $query = $koneksi->query("SELECT * FROM tempat_wisata WHERE id_tempat = '$id_tempat'");

@@ -15,7 +15,7 @@ class UserController
 
     // Proses upload gambar
     if (isset($_FILES['gambar_user']) && $_FILES['gambar_user']['error'] == 0) {
-        $gambar_user = rand(0, 9999) . $_FILES['gambar_user']['name'];
+        $gambar_user = rand(0, 9999) . htmlspecialchars($_FILES['gambar_user']['name']);
         $tmp = $_FILES['gambar_user']['tmp_name'];
         $absolute_path = __DIR__ . '/../assets/img/' . $gambar_user;
         $size = $_FILES['gambar_user']['size'];
@@ -133,7 +133,7 @@ class UserController
     
         // Periksa apakah ada gambar baru yang diupload
         if (!empty($_FILES['gambar_user_baru']['name'])) {
-            $gambar_user_baru = htmlspecialchars($_FILES['gambar_user_baru']['name']);
+            $gambar_user_baru = rand(0, 9999) .htmlspecialchars($_FILES['gambar_user_baru']['name']);
             $tmp = $_FILES['gambar_user_baru']['tmp_name'];
             $path = __DIR__ . "/../assets/img/" . $gambar_user_baru;
             $size = $_FILES['gambar_user_baru']['size'];

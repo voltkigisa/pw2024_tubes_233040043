@@ -41,6 +41,8 @@ if(isset($_GET['id_tempat'])){
       </div>
     </div>
   </section>
+
+  <a href="admin/tempat/create_tempat.php"><button type="button" class="btn btn-success my-3 mx-1">+ tambah</button></a>
   <form id="search-form" class="input-group mb-3" >
         <input type="text" name="search" placeholder="Search" class="input-group-text search" id="search-costumer">
     </form>
@@ -53,14 +55,14 @@ if(isset($_GET['id_tempat'])){
           <div class="card shadow-sm">
             <img src="admin/tempat/img/<?= htmlspecialchars($data['foto_tempat'], ENT_QUOTES, 'UTF-8'); ?>" class="bd-placeholder-img card-img-top" width="100%" height="225">
             <div class="card-body">
-            <h5 class="card-title"><?= $data['nama_tempat'] ?></h5>
-            <p class="card-text"><?= $data['deskripsi_tempat'] ?></p>
+            <h5 class="card-title"><?= htmlspecialchars($data['nama_tempat']) ?></h5>
+            <p class="card-text"><?= htmlspecialchars($data['lokasi_tempat']) ?></p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
                   <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
                   <?php if ($userId && $data['id_user'] == $userId):?>
-                  <a href="admin/tempat/edit_tempat.php?id_tempat=<?= $data['id_tempat'] ?>"><button type="button" class="btn btn-sm btn-outline-secondary">Edit</button></a>
-                  <a href="?id_tempat=<?= $data['id_tempat'] ?>"><button type="button" class="btn btn-sm btn-outline-secondary">Hapus</button></a>
+                  <a href="admin/tempat/edit_tempat.php?id_tempat=<?= htmlspecialchars($data['id_tempat']) ?>"><button type="button" class="btn btn-sm btn-outline-secondary">Edit</button></a>
+                  <a href="?id_tempat=<?= htmlspecialchars($data['id_tempat']) ?>"><button type="button" class="btn btn-sm btn-outline-secondary">Hapus</button></a>
                   <?php endif; ?>
                 </div>
               </div>
