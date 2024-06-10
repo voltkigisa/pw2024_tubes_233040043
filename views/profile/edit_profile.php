@@ -18,8 +18,6 @@ if (isset($_POST['submit'])) {
     $result = $userController->updateProfile($koneksi);
     if ($result > 0) {
         $_SESSION['pesan'] = "Data berhasil diubah";
-    } else {
-        $_SESSION['pesan'] = "Data gagal diubah";
     }
     if($_SESSION['role']== 'admin'){
     header('Location: ../../admin/user/index.php');

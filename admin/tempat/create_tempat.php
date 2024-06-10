@@ -13,7 +13,7 @@ if(isset($_POST['submit'])){
     if($result > 0){
         $_SESSION['pesan'] = "Data berhasil ditambahkan";
     }elseif(isset($_SESSION['error'])){
-        $_SESSION['pesan'] = "Gambar Ukuran gambar terlalu besar atau tipe gambar tidak sesuai";
+        $_SESSION['error'] = "Gambar Ukuran gambar terlalu besar atau tipe gambar tidak sesuai";
     }
     if($_SESSION['role']=="admin"){
         header('Location: index.php');

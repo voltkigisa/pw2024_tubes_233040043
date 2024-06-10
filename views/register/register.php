@@ -11,12 +11,7 @@ if(isset($_POST['register'])){
         $_SESSION['pesan'] = "Berhasil register";
         header('Location: ../login/login.php'); // Redirect ke halaman login
         exit();
-    }elseif(isset($_SESSION['error'])){
-        $_SESSION['pesan'] = "Ukuran atau tipe gambar tidak sesuai";
-    }else{
-        $_SESSION['pesan'] = "Gagal register";
     }
-    header('Location: ../login/login.php');
 }
 ?>
 

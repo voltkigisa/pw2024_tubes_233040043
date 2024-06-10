@@ -15,6 +15,13 @@ if (isset($_POST['logout'])) {
     $loginController->logout();
     header('Location: /pw2024_tubes_233040043/index.php');
   }
+
+  if(isset($_SESSION['error'])){
+    echo "<div class='alert alert-danger alert-dismissible mt-3'>"
+    .$_SESSION['error'].
+    "<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
+    unset($_SESSION['error']);
+}
 ?>
 <div class="container mt-5">
         <div class="row justify-content-center">

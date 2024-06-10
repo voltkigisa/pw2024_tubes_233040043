@@ -23,8 +23,6 @@ if ($_SESSION['role'] !== 'admin' && $_SESSION['id_user'] != $data['id_user']) {
         $result = $tempatController->updateTempat($koneksi);
         if($result > 0){
             $_SESSION['pesan'] = "Data berhasil diubah";
-        }else{
-            $_SESSION['pesan'] = "Data gagal diubah";
         }
         if($_SESSION['role']=="admin"){
         header('Location: index.php');

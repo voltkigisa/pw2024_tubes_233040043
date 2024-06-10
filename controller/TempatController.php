@@ -27,10 +27,11 @@ class TempatController
                     throw new Exception("Error executing query: " . $koneksi->error);
                 }
             }else {
-                $_SESSION['error'] = 'Gambar harus diupload';  
-            }
-        } else {
-            $_SESSION['error'] = 'Ukuran atau tipe gambar tidak sesuai';
+                $_SESSION['error'] = 'Ukuran atau tipe gambar tidak sesuai';
+                header('Location: ../../admin/tempat/create_tempat.php');
+                }
+                } else {
+            $_SESSION['error'] = 'Gambar harus diupload';  
            
         }
 
@@ -76,7 +77,9 @@ class TempatController
                     }
                 }
             } else {
-                throw new Exception("Tipe atau ukuran file tidak valid");
+                $_SESSION['error'] = "Ukuran atau tipe gambar tidak sesuai";
+                header('Location: ../../admin/tempat/index.php');
+                exit();
             }
         } else {
             $foto_tempat_baru = $foto_tempat_lama;

@@ -42,10 +42,11 @@ class UserController
                 }
             } 
         } else {
+            $_SESSION['error'] = 'Ukuran atau tipe gambar tidak sesuai';
+            header('Location: /pw2024_tubes_233040043/index.php');
+            }
+            } else {
             $_SESSION['error'] = 'Gambar harus diupload';
-        }
-    } else {
-        $_SESSION['error'] = 'Ukuran atau tipe gambar tidak sesuai';
     }
 }
 
@@ -150,7 +151,9 @@ class UserController
                     }
                 }
             } else {
-                throw new Exception("Invalid file type or size");
+                $_SESSION['error'] = "Ukuran atau Type gambar tidak sesuai";
+                header('Location: /pw2024_tubes_233040043/views/profile/profile.php');
+                exit();
             }
         } else {
             $gambar_user_baru = $gambar_user_lama;

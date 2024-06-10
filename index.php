@@ -10,6 +10,12 @@ if(isset($_SESSION['pesan'])){
     "<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
     unset($_SESSION['pesan']);
 }
+if(isset($_SESSION['error'])){
+    echo "<div class='alert alert-danger alert-dismissible mt-3'>"
+    .$_SESSION['error'].
+    "<button type='button' class='btn-close' data-bs-dismiss='alert' aria-label='Close'></button></div>";
+    unset($_SESSION['error']);
+}
 
 $query = $koneksi->query("SELECT * FROM tempat_wisata");
 
