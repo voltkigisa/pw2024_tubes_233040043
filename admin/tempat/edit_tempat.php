@@ -37,7 +37,11 @@ if ($_SESSION['role'] !== 'admin' && $_SESSION['id_user'] != $data['id_user']) {
 ?>
 
 <h1>Edit Tempat Wisata</h1>
-<a href="index.php"><button type="button" class="btn btn-primary my-3">Kembali</button></a>
+<?php if(isset($_SESSION['role']) && $_SESSION['role'] == "admin"): ?>
+        <a href="index.php"><button type="button" class="btn btn-primary my-3">Kembali</button></a>
+        <?php else: ?>
+        <a href="../../index.php"><button type="button" class="btn btn-primary my-3">Kembali</button></a>
+        <?php endif; ?>
 <br>
 <div class='mb-3 d-flex flex-column'>
     <label for="foto_tempat_lama" class="form-label ">Foto Tempat Lama</label>

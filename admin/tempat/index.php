@@ -37,6 +37,9 @@ $limit = 10; // Jumlah data perhalaman
 
 //hitung jumlah total data
 $total_query = $koneksi->query("SELECT COUNT(*) AS total FROM tempat_wisata");
+if ($total_query === false) {
+    die("Error: " . $koneksi->error);
+}
 $total_data = $total_query->fetch_assoc()['total'];
 
 //hitung total jumlah alaman
@@ -44,6 +47,8 @@ $total_pages = ceil($total_data / $limit);
 
 //tentukan halaman saat ini
 $page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+if ($page < 1) $page = 1; // Menghindari halaman negatif
+if ($page > $total_pages) $page = $total_pages; // Menghindari halaman lebih dari total halaman
 $current_page = $page;
 
 //hitung offset data
@@ -51,6 +56,10 @@ $offset = ($page - 1) * $limit;
 
 // Queri database dengan limit dan offset
 $query = $koneksi->query("SELECT * FROM tempat_wisata LIMIT $limit OFFSET $offset");
+if ($query === false) {
+    die("Error: " . $koneksi->error);
+}
+
 
 // nomor urut
 $no = ($page - 1) * $limit + 1;

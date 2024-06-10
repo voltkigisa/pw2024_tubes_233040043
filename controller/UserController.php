@@ -42,10 +42,10 @@ class UserController
                 }
             } 
         } else {
-            $_SESSION['error'] = 'Ukuran atau tipe gambar tidak sesuai';
+            $_SESSION['error'] = 'Gambar harus diupload';
         }
     } else {
-        $_SESSION['error'] = 'Gambar harus diupload';
+        $_SESSION['error'] = 'Ukuran atau tipe gambar tidak sesuai';
     }
 }
 

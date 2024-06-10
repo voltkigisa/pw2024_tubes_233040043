@@ -11,7 +11,12 @@ if(isset($_POST['register'])){
         $_SESSION['pesan'] = "Berhasil register";
         header('Location: ../login/login.php'); // Redirect ke halaman login
         exit();
+    }elseif(isset($_SESSION['error'])){
+        $_SESSION['pesan'] = "Ukuran atau tipe gambar tidak sesuai";
+    }else{
+        $_SESSION['pesan'] = "Gagal register";
     }
+    header('Location: ../login/login.php');
 }
 ?>
 
@@ -25,15 +30,6 @@ if(isset($_POST['register'])){
     
     <div class="container p-5 ">
         <h1>Registrasi Pengguna</h1>
-
-        <?php if (isset($_SESSION['error'])): ?>
-            <div class="alert alert-danger alert-dismissible " role="alert">
-                <?php echo $_SESSION['error']; ?>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"> </button>
-            </div>
-            <?php unset($_SESSION['error']); ?>
-        <?php endif; ?>
-        
         <form action="" method="POST" enctype="multipart/form-data">
             <div class="form-group">
                 <label for="username">Username:</label>

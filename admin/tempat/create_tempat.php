@@ -12,8 +12,8 @@ if(isset($_POST['submit'])){
     $result = $tempatController->storeTempat($koneksi);
     if($result > 0){
         $_SESSION['pesan'] = "Data berhasil ditambahkan";
-    }else{
-        $_SESSION['pesan'] = "Data gagal ditambahkan";
+    }elseif(isset($_SESSION['error'])){
+        $_SESSION['pesan'] = "Gambar Ukuran gambar terlalu besar atau tipe gambar tidak sesuai";
     }
     if($_SESSION['role']=="admin"){
         header('Location: index.php');
@@ -26,7 +26,11 @@ if(isset($_POST['submit'])){
 ?>
     <h1>Tambah Tempat Wisata</h1>
     <div class="container-create-tempat">
+        <?php if(isset($_SESSION['role']) && $_SESSION['role'] == "admin"): ?>
         <a href="index.php"><button type="button" class="btn btn-primary my-3">Kembali</button></a>
+        <?php else: ?>
+        <a href="../../index.php"><button type="button" class="btn btn-primary my-3">Kembali</button></a>
+        <?php endif; ?>
 
         <form method="POST" action="" enctype="multipart/form-data">
         <input type="hidden" name="id_user" value="<?php echo isset($data) ? $data['id_user'] : '';?>">

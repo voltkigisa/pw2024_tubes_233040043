@@ -26,7 +26,12 @@ class TempatController
                 } else {
                     throw new Exception("Error executing query: " . $koneksi->error);
                 }
+            }else {
+                $_SESSION['error'] = 'Gambar harus diupload';  
             }
+        } else {
+            $_SESSION['error'] = 'Ukuran atau tipe gambar tidak sesuai';
+           
         }
 
 
