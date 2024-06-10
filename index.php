@@ -59,7 +59,7 @@ if(isset($_GET['id_tempat'])){
             <p class="card-text"><?= htmlspecialchars($data['lokasi_tempat']) ?></p>
               <div class="d-flex justify-content-between align-items-center">
                 <div class="btn-group">
-                  <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                  <a href="admin/tempat/view_tempat.php?id_tempat=<?= htmlspecialchars($data['id_tempat']);?>"><button type="button" class="btn btn-sm btn-outline-secondary">View</button></a>
                   <?php if ($userId && $data['id_user'] == $userId):?>
                   <a href="admin/tempat/edit_tempat.php?id_tempat=<?= htmlspecialchars($data['id_tempat']) ?>"><button type="button" class="btn btn-sm btn-outline-secondary">Edit</button></a>
                   <a href="?id_tempat=<?= htmlspecialchars($data['id_tempat']) ?>"><button type="button" class="btn btn-sm btn-outline-secondary">Hapus</button></a>

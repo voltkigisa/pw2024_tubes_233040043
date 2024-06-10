@@ -101,7 +101,7 @@ $no = ($page - 1) * $limit + 1;
                 echo "<td>
                         <a href='edit_tempat.php?id_tempat=".htmlspecialchars($data['id_tempat'])."'><button type='button' class='btn btn-warning'><i class='bi bi-pen'></i></button></a> 
                         <a href='index.php?id_tempat=".htmlspecialchars($data['id_tempat'])."'><button type='button' class='btn btn-danger'><i class='bi bi-trash3'></i></button></a>   
-                        <a href='?id_tempat=".htmlspecialchars($data['id_tempat'])."'><button type='button' class='btn btn-primary'><i class='bi bi-eye'></i></button></a> </td>";
+                        <a href='view_tempat.php?id_tempat=".htmlspecialchars($data['id_tempat'])."'><button type='button' class='btn btn-primary'><i class='bi bi-eye'></i></button></a> </td>";
                 echo "</tr>";
                 ;
             endwhile;
